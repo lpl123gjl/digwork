@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级信息编辑网站 - 同学作品</title>
+    <!-- 引入Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>{{ siteName }}</h1>
+        </header>
+        <nav>
+            <a v-for="page in pages" :key="page.id" :href="page.url">{{ page.title }}</a>
+        </nav>
+
+        <div class="content">
+            <div class="work" v-for="(work, index) in works" :key="work.id">
+                <div class="work-background" :style="{ backgroundColor: backgrounds[index] }"></div>
+                <h2>{{ work.title }}</h2>
+                <p class="author">作者: {{ work.author }}</p>
+                <div class="content-section" v-html="work.content"></div>
+            </div>
+        </div>
+
+        <footer>
+            © 2024 {{ siteName }}. All Rights Reserved.楼盼雷.
+        </footer>
+    </div>
+
+    <!-- Vue.js script -->
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                siteName: '班级信息编辑网站',
+                pages: [
+                    { id: 1, title: '首页', url: 'index.html' },
+                    { id: 2, title: '班级日志', url: 'logs.html' },
+                    { id: 3, title: '班级相册', url: 'album.html' },
+                    { id: 4, title: '同学作品', url: 'works.html' },
+                    { id: 5, title: '留言板', url: 'guestbook.html' },
+                    { id: 6, title: '关于我们', url: 'about.html' },
+                ],
+                works: [
+                    {
+                        id: 1,
+                        title: '优秀作文段落1',
+                        author: '张三',
+                        content: '<p>春雨淅淅沥沥，滋润着大地;桃花又红了。绽放出无尽的美丽;种子萌发了，又迎接着一个崭新的开始。一切都活了，点缀着大地。放眼望去，绿油油的麦田。碧绿的大地，给人带来一阵生机。春，来临了，一切都在变，唯独我自己，还是儿时的模样，背靠着没有任何装饰的电线杆，独立在小径上，心中充满无限的想象与渴望。</p>'
+                    },
+                    {
+                        id: 2,
+                        title: '优秀作文段落2',
+                        author: '李四',
+                        content: '<p>自信是一种拥有，一股勇气。就是凭借着这股激情，我们才能开拓自己的人生道路，尽情描绘明日的七彩世界。没有自信，越王勾践怎能砍断吴王的金戈?没有自信，区区西秦如何东出土地函谷而一统天下?没有自信，百二秦关怎能更换上刘汉的旗号?没有自信，成吉思汗的铁骑又如何能几乎统一亚欧非三洲的?。</p>'
+                    },
+                    {
+                        id: 3,
+                        title: '优秀作文段落3',
+                        author: '王多多',
+                        content: '<p>一抹落日的余晖刚挥映着东汉历经沧桑的斜阳古道，又炫染着盛唐平沙落雁的小桥流水人家;一枝傲雪的寒梅刚绽放在明末柳岸闻莺的大明湖畔，又芬芳在晚清长河落日的沧壮与悲凉。时光荏苒，岁月蹉跎，人生易逝，悲欢离合。俯察人生百味，静观世态淡凉。人们不禁要拷问：“何为人生，何为诚信”。</p>'
+                    },
+                    {
+                        id: 4,
+                        title: '优秀作文段落4',
+                        author: '周六',
+                        content: '<p> 枫叶终于红透了。路两旁的枫叶树好似一个巨人，直直的守在路两旁，迎接着美丽的秋姑娘，同时也迎接着人们的到来。秋姑娘好像来了，这一会儿，巨人们正在跳舞唱歌欢迎着她。有节奏的发出“沙沙”声。甩动着红发，上面立即飞下来几只红蝴蝶。秋姑娘高兴极了。她好像很满意这迎接仪式。</p>'
+                    },
+                    {
+                        id: 5,
+                        title: '优秀作文段落5',
+                        author: '齐夏',
+                        content: '<p>力挽狂澜的豪情会在你的奋斗拼搏中重新复合，那是鞭策你趋于梦想的高度;倔强的守望会在你的坚持等待中重燃光亮，那是点亮你心中熄灭已久的希望之光。依旧坚守内心的梦想，不畏挫折，看淡痛苦。群雄逐鹿也会有鹿死我手的锋芒;万木争春也会有春在吾心的峥嵘!</p>'
+                    },
+                    {
+                        id: 6,
+                        title: '优秀作文段落6',
+                        author: '乔家劲',
+                        content: '<p>那个笑容蕴涵了多深远的意义，犹如一朵粉嫩的花朵，我惊讶，惊讶在这寒冷的冬天，它竟能开得如此灿烂。</p>'
+                    },
+                    {
+                        id: 7,
+                        title: '优秀作文段落7',
+                        author: '陈俊男',
+                        content: '<p>在人生的道路上，人必经失败，而后成功。爱迪生发明电灯，把数千次失败当作收获。因为毕竟知道了这种材料是不能做电灯的。为成功的发明电灯奠定了基础。吃一堑，长一智，人生是在不断的失败中吸取教训，然后走向辉煌。</p>'
+                    },
+                    // 添加更多作品
+                ],
+                backgrounds: ['#ffd8cb', '#cbe2ff', '#d9f5cb', '#f5e1cb', '#cbdcff', '#f8ffcb', '#f8ffcb'],
+                // 添加更多颜色
+            }
+        });
+    </script>
+</body>
+</html>

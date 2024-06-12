@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级信息编辑网站 - 关于我们</title>
+    <!-- 引入Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <!-- 引入外部CSS文件 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>{{ siteName }}</h1>
+        </header>
+        <nav>
+            <a v-for="page in pages" :key="page.id" :href="page.url">{{ page.title }}</a>
+        </nav>
+
+        <div class="content">
+            <section>
+                <h2>关于我们</h2>
+                <p>
+                    欢迎来到我们班级的信息编辑网站！我们的班级成立于（成立年份），致力于为同学们提供一个紧密联系、互动交流的平台。我们的目标是促进同学之间的合作与友谊，共同创造美好的校园回忆。
+                </p>
+                <p>
+                    <strong>成立目的：</strong> 我们班级成立的初衷是促进同学们之间的交流与合作，共同成长。通过这个网站，我们希望能够方便地分享班级活动、日常生活点滴，以及展示同学们的才华与成就。
+                </p>
+                <p>
+                    <strong>特色与活动：</strong>
+                </p>
+                <ul>
+                    <li><strong>班级日志：</strong>了解班级中发生的精彩活动和重要事件。</li>
+                    <li><strong>班级相册：</strong>欣赏班级精选照片，记录下每个珍贵时刻。</li>
+                    <li><strong>同学作品：</strong>发现同学们的创作天赋，欣赏他们的画作、文章等作品。</li>
+                    <li><strong>留言板：</strong>在留言板上分享你的想法，与同学们交流看法和建议。</li>
+                </ul>
+                <div class="class-members">
+                    <h3>班级成员：</h3>
+                    <ul>
+                        <li>张三</li>
+                        <li>李四</li>
+                        <li>钱多多</li>
+                        <li>周末</li>
+                        <li>齐夏</li>
+                        <li>乔家俊</li>
+                        <li>陈俊男</li>
+                        <li>林檎</li>
+                        <li>秦冬丁</li>
+                        <li>甜甜</li>
+                        <li>楚天秋</li>
+                        <li>云瑶</li>
+                        <!-- 在此添加更多班级成员 -->
+                    </ul>
+                </div>
+                <p>
+                    我们鼓励大家积极参与，共同为班级建设添砖加瓦。让我们一起创造一个温馨、充满活力的班级大家庭！
+                </p>
+
+                
+                <p>
+                    在这个网站上，你可以找到关于班级的最新信息、活动安排和同学们的精彩作品。无论是日常生活的点滴还是重要事件，都将在这里被记录和分享。
+                </p>
+                <p>
+                    如果你有任何想法或建议，欢迎在留言板上与我们分享。让我们共同努力，让这个班级信息编辑网站成为我们大家的交流平台！
+                </p>
+            </section>
+
+            <!-- Class Fees Module -->
+            <div class="class-fees">
+                <h3>班费信息：</h3>
+                <label for="unitPrice">每人单价：</label>
+                <input type="number" id="unitPrice" v-model="unitPrice" @input="calculateTotal" />
+                <label for="quantity">人数：</label>
+                <input type="number" id="quantity" v-model="quantity" @input="calculateTotal" />
+                <p>班费总额：{{ totalFees }}</p>
+            </div>
+        </div>
+
+        <footer>
+            © {{ currentYear }} {{ siteName }}. All Rights Reserved.楼盼雷.
+        </footer>
+    </div>
+
+    <!-- Vue.js script -->
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                siteName: '班级信息编辑网站',
+                currentYear: new Date().getFullYear(),
+                pages: [
+                    { id: 1, title: '首页', url: 'index.html' },
+                    { id: 2, title: '班级日志', url: 'logs.html' },
+                    { id: 3, title: '班级相册', url: 'album.html' },
+                    { id: 4, title: '同学作品', url: 'works.html' },
+                    { id: 5, title: '留言板', url: 'guestbook.html' },
+                    { id: 6, title: '关于我们', url: 'about.html' },
+                ],
+                unitPrice: 0,
+                quantity: 0,
+                totalFees: 0,
+            },
+            methods: {
+                calculateTotal() {
+                    this.totalFees = this.unitPrice * this.quantity;
+                },
+            },
+        });
+    </script>
+</body>
+</html>

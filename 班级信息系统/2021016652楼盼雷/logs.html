@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级信息编辑网站 - 班级日志</title>
+
+    <!-- Include Vue.js from CDN -->
+    <script src="vue.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>班级信息编辑网站</h1>
+        </header>
+        <nav>
+            <a href="index.html">首页</a>
+            <a href="logs.html">班级日志</a>
+            <a href="album.html">班级相册</a>
+            <a href="works.html">同学作品</a>
+            <a href="guestbook.html">留言板</a>
+            <a href="about.html">关于我们</a>
+        </nav>
+
+        <div class="content">
+            <div v-for="log in logs" class="log">
+                <h2>{{ log.date }}</h2>
+                <p class="date">日期: {{ log.date }}</p>
+                <p>{{ log.content }}</p>
+            </div>
+        </div>
+
+        <footer>
+            © 2024 班级信息编辑网站. All Rights Reserved.楼盼雷.
+        </footer>
+    </div>
+
+    <!-- Vue.js script -->
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                logs: [
+                {
+                        date: '2024-01-07',
+                        content: '今天有一位王昊同学上学迟到，一位刘昊同学的作业未交。老师表扬了杨同学在课堂上的积极参与。'
+                    },
+                    {
+                        date: '2024-01-08',
+                        content: '今天有三位同学上学迟到，没有同学的作业未交。老师表扬了杨同学在课堂上的积极参与。'
+                    },
+                    {
+                        date: '2024-01-09',
+                        content: '今天有两位同学上学迟到，三位同学的作业未交。老师表扬了杨同学在课堂上的积极参与。'
+                    },
+                    {
+                        date: '2024-01-10',
+                        content: '今天有两位同学上学迟到，三位同学的作业未交。老师表扬了杨同学在课堂上的积极参与。'
+                    },
+                    {
+                        date: '2024-01-11',
+                        content: '今天没有同学上学迟到，但有一位同学的作业未交。老师进行了一次课堂小测验。'
+                    },
+                    {
+                        date: '2024-01-12',
+                        content: '班级进行了一次团队合作活动，大家积极参与，取得了良好的成绩。'
+                    }
+                    // Add more logs as needed
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

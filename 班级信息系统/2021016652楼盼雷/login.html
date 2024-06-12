@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级信息编辑网站 - 登录</title>
+    
+    <!-- Add Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>班级信息编辑网站</h1>
+    </header>
+    
+    <div id="app" class="login-container">
+        <h2>登录</h2>
+        <form @submit.prevent="login">
+            <div class="form-group">
+                <label for="username">用户名:</label>
+                <input type="text" v-model="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码:</label>
+                <input type="password" v-model="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">登录</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                username: '',
+                password: ''
+            },
+            methods: {
+                login() {
+                   
+                    if (this.username === 'admin' && this.password === '123') {
+                    
+                        window.location.href = "index.html";
+                    } else {
+                   
+                        alert('登录失败，请检查用户名和密码。');
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

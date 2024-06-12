@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级信息编辑网站 - 班级相册</title>
+    <!-- 引入Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <!-- 添加页面特定的样式 -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .photo {
+            position: relative;
+        }
+
+        .like-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .like-button img {
+            width: 16px;
+            height: 16px;
+        }
+
+        .like-button.liked img {
+            filter: invert(1); /* Invert the heart color to red */
+        }
+
+        .like-button.liked span {
+            color: red; /* Change the text color to red when liked */
+        }
+
+        .photo img {
+            width: 100%; /* Set the width to 100% of the container */
+            height: auto; /* Maintain aspect ratio */
+            max-width: 400px; /* Limit the maximum width */
+            margin: 10px 0; /* Add some margin for spacing */
+            transition: transform 0.3s ease; /* Add smooth transition for zoom effect */
+        }
+
+        .photo.zoomed img {
+            transform: scale(1.5); /* Apply zoom effect by scaling the image */
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border: 2px solid #3498db;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .popup.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>{{ siteName }}</h1>
+        </header>
+        <nav>
+            <a v-for="page in pages" :key="page.id" :href="page.url">{{ page.title }}</a>
+        </nav>
+
+        <div class="content">
+            <div v-for="photo in photos" :key="photo.id" class="photo" @dblclick.native="toggleZoom(photo.id)" @click="toggleZoom(photo.id)">
+                <h2>{{ photo.title }}</h2>
+                <p class="date">上传日期: {{ photo.date }}</p>
+                <div class="like-button" :class="{ 'liked': photo.liked }" @click="likePhoto(photo.id)">
+                    <img v-if="!photo.liked" src="images/点赞.png" alt="Heart">
+                    <span v-if="photo.liked">❤️</span>
+                </div>
+                <img :src="photo.src" :alt="photo.title" :class="{ 'zoomed': photo.zoomed }">
+            </div>
+        </div>
+
+        <div class="popup" v-if="showPopup">
+           
+        </div>
+
+        <footer>
+            © {{ currentYear }} {{ siteName }}. All Rights Reserved.楼盼雷.
+        </footer>
+    </div>
+
+    <!-- Vue.js script -->
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                siteName: '班级信息编辑网站',
+                currentYear: new Date().getFullYear(),
+                pages: [
+                    { id: 1, title: '首页', url: 'index.html' },
+                    { id: 2, title: '班级日志', url: 'logs.html' },
+                    { id: 3, title: '班级相册', url: 'album.html' },
+                    { id: 4, title: '同学作品', url: 'works.html' },
+                    { id: 5, title: '留言板', url: 'guestbook.html' },
+                    { id: 6, title: '关于我们', url: 'about.html' },
+                ],
+                photos: [
+                    { id: 1, title: '操场毕业照', date: '2024-01-20', src: 'images/photo1.jpg', liked: false, zoomed: false },
+                    { id: 2, title: '教室上课照', date: '2024-01-25', src: 'images/photo2.jpeg', liked: false, zoomed: false },
+                    { id: 3, title: '照片墙', date: '2024-01-25', src: 'images/photo3.jpeg', liked: false, zoomed: false },
+                    { id: 4, title: '图书角', date: '2024-01-20', src: 'images/图书角.jpeg', liked: false, zoomed: false },
+                    { id: 5, title: '干净的教室', date: '2024-01-25', src: 'images/干净的教室.jpeg', liked: false, zoomed: false },
+                    { id: 6, title: '美术课的瞬间', date: '2024-01-25', src: 'images/美术课.jpeg', liked: false, zoomed: false },
+                    // 添加更多照片
+                ],
+                showPopup: false,
+            },
+            methods: {
+                likePhoto(photoId) {
+                    const photo = this.photos.find(p => p.id === photoId);
+                    if (photo) {
+                        photo.liked = !photo.liked;
+                        this.showPopup = true;
+                        setTimeout(() => {
+                            this.showPopup = false;
+                        }, 2000); // Close popup after 2 seconds
+                    }
+                },
+                toggleZoom(photoId) {
+                    const photo = this.photos.find(p => p.id === photoId);
+                    if (photo) {
+                        photo.zoomed = !photo.zoomed;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

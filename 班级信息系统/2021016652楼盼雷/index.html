@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级信息编辑网站 - 首页</title>
+    <style>
+        /* Your custom styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-image: url('images/header-bg.jpg');
+            background-color: #333;
+            color: #240404;
+            padding: 80px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #4caf50;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        /* Slideshow styles */
+        #mask {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .center {
+            position: relative;
+            text-align: center;
+        }
+
+        .title img {
+            vertical-align: middle;
+        }
+
+        .title {
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .left, .right {
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -25px;
+            cursor: pointer;
+        }
+
+        .left {
+            left: 10px;
+        }
+
+        .right {
+            right: 10px;
+        }
+    </style>
+    <!-- Include Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Image slideshow component -->
+        <div id="mask">
+            <div class="center">
+                <h2 class="title">
+                    <img src="images/zwu/login0.png" alt="">
+                    浙江万里学院
+                </h2>
+                <!-- Image -->
+                <img v-bind:src="currentImage" alt="" />
+
+                <!-- Left arrow -->
+                <a href="javascript:void(0)" v-on:click="prev" class="left">
+                    <img src="./images/prev.png" alt="" />
+                </a>
+
+                <!-- Right arrow -->
+                <a href="javascript:void(0)" v-on:click="next" class="right">
+                    <img src="./images/next.png" alt="" />
+                </a>
+            </div>
+        </div>
+
+        <!-- The rest of your content (header, nav, container) -->
+        <header>
+            <h1>{{ siteName }}</h1>
+        </header>
+        <nav>
+            <a v-for="page in pages" :key="page.id" :href="page.url">{{ page.title }}</a>
+        </nav>
+        <div class="container">
+            <section v-for="section in sections" :key="section.id">
+                <h2>{{ section.title }}</h2>
+                <p>{{ section.description }}</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Vue.js script -->
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                siteName: '班级信息编辑网站',
+                pages: [
+                    { id: 1, title: '首页', url: 'index.html' },
+                    { id: 2, title: '班级日志', url: 'logs.html' },
+                    { id: 3, title: '班级相册', url: 'album.html' },
+                    { id: 4, title: '同学作品', url: 'works.html' },
+                    { id: 5, title: '留言板', url: 'guestbook.html' },
+                    { id: 6, title: '关于我们', url: 'about.html' },
+                ],
+                sections: [
+                    { id: 1, title: '班级日志', description: '浏览最新的班级日志，了解班级中发生的精彩活动和重要事件。' },
+                    { id: 2, title: '班级相册', description: '欣赏精选的班级照片，记录下每个珍贵时刻。' },
+                    { id: 3, title: '同学作品', description: '发现同学们的创作天赋，欣赏他们的画作、文章等作品。' },
+                    { id: 4, title: '留言板', description: '留下你的想法，与同学们分享你的看法和建议。' },
+                    { id: 5, title: '关于我们', description: '了解班级的背景、历史和联系方式。欢迎加入我们的大家庭！' },
+                ],
+                // Image slideshow data
+                slideshowImages: [
+                    'images/zwu/01p.jpeg',
+                    'images/zwu/02p.jpeg',
+                    'images/zwu/03p.jpeg',
+                    'images/zwu/04p.jpeg',
+                    'images/zwu/05p.jpg',
+                    'images/zwu/06p.jpeg',
+                    'images/zwu/07p.jpeg',
+                    'images/zwu/08p.jpg',
+                    'images/zwu/09p.jpg',
+                    'images/zwu/10p.jpeg',
+                    'images/zwu/11p.jpeg',
+                    'images/zwu/12p.jpeg',
+                    // Add more image links as needed
+                ],
+                currentIndex: 0, // Initialize currentIndex
+            },
+            computed: {
+                currentImage: function () {
+                    return this.slideshowImages[this.currentIndex];
+                }
+            },
+            methods: {
+                prev: function () {
+                    // Switch to the previous image
+                    this.currentIndex = (this.currentIndex - 1 + this.slideshowImages.length) % this.slideshowImages.length;
+                },
+                next: function () {
+                    // Switch to the next image
+                    this.currentIndex = (this.currentIndex + 1) % this.slideshowImages.length;
+                }
+            },
+            mounted: function () {
+                // You can add any additional initialization here
+            }
+        });
+    </script>
+</body>
+</html>

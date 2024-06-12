@@ -1,0 +1,99 @@
+/* 样式部分，根据需要可以进行调整 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-image: url('images/header-bg.jpg');
+    background-color: #333;
+    color: #280404;
+    padding: 80px;
+    text-align: center;
+}
+
+nav {
+    background-color: #4caf50;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.content {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.class-members {
+    margin-top: 20px;
+}
+
+.class-members ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.class-members li {
+    margin-bottom: 5px;
+}
+
+/* 新增登录页面样式 */
+.login-container {
+    background-color: rgba(255, 255, 255, 0.8); /* 调整透明度 */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.login-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #45a049;
+}

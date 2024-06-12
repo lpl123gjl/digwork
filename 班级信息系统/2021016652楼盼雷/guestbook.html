@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级信息编辑网站 - 留言板</title>
+    <!-- 引入Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <!-- 添加页面特定的样式 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>{{ siteName }}</h1>
+        </header>
+        <nav>
+            <a v-for="page in pages" :key="page.id" :href="page.url">{{ page.title }}</a>
+        </nav>
+
+        <div class="content">
+            <div v-for="message in messages" :key="message.id" class="message">
+                <h2>{{ message.title }}</h2>
+                <p class="user">用户: {{ message.user }}</p>
+                <p class="date">日期: {{ message.date }}</p>
+                <p>{{ message.content }}</p>
+                <p>{{ message.likes }} 人点赞</p>
+                <button class="like-btn" @click="likeMessage(message.id)">点赞</button>
+
+                <input v-model="message.newComment" class="comment-input" placeholder="添加评论...">
+                <button @click="addComment(message.id)">评论</button>
+                <div v-for="comment in message.comments" :key="comment.id">
+                    <p class="user">用户: {{ comment.user }}</p>
+                    <p>{{ comment.content }}</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            © {{ currentYear }} {{ siteName }}. All Rights Reserved.楼盼雷.
+        </footer>
+    </div>
+
+    <!-- Vue.js script -->
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                siteName: '班级信息编辑网站',
+                currentYear: new Date().getFullYear(),
+                pages: [
+                    { id: 1, title: '首页', url: 'index.html' },
+                    { id: 2, title: '班级日志', url: 'logs.html' },
+                    { id: 3, title: '班级相册', url: 'album.html' },
+                    { id: 4, title: '同学作品', url: 'works.html' },
+                    { id: 5, title: '留言板', url: 'guestbook.html' },
+                    { id: 6, title: '关于我们', url: 'about.html' },
+                ],
+                messages: [
+                    { 
+                        id: 1, 
+                        title: '留言标题 1', 
+                        user: '张三', 
+                        date: '2023-11-30', 
+                        content: '今天那个数学老师又给了一堆作业，根本写不完', 
+                        likes: 10,
+                        comments: [],
+                        newComment: ''
+                    },
+                    { 
+                        id: 2, 
+                        title: '留言标题 2', 
+                        user: '李四', 
+                        date: '2023-12-05', 
+                        content: '体育老师怎么总是生病，我们都没有体育课上了', 
+                        likes: 0,
+                        comments: [],
+                        newComment: ''
+                    },
+                    // 添加更多留言
+                ]
+            },
+            methods: {
+                likeMessage(messageId) {
+                    const message = this.messages.find(msg => msg.id === messageId);
+                    if (message) {
+                        message.likes++;
+                    }
+                },
+                addComment(messageId) {
+                    const message = this.messages.find(msg => msg.id === messageId);
+                    if (message && message.newComment.trim() !== '') {
+                        message.comments.push({
+                            id: message.comments.length + 1,
+                            user: '楼盼雷',  // 可以替换为实际用户
+                            content: message.newComment
+                        });
+                        message.newComment = '';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
